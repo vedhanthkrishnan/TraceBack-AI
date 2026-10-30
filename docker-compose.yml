@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  traceback-backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: traceback-ai-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - EXASOL_DSN=exasol-db:8563
+      - EXASOL_USER=sys
+      - EXASOL_PASSWORD=exasol
+      - EXASOL_SCHEMA=TRACEBACK_AI
+      - MOCK_EXASOL=false
+      - LLM_PROVIDER=mock
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  # Note: Exasol Personal / Community Edition image requires privileged container execution and dedicated host resources
+  # Ensure your docker daemon supports nested virtualization if running Exasol container locally.
+  # exasol-db:
+  #   image: exasol/docker-db:latest
+  #   container_name: traceback-exasol
+  #   ports:
+  #     - "8563:8563"
+  #   privileged: true
+  #   environment:
+  #     - EXA_MEM_SIZE=2GiB
