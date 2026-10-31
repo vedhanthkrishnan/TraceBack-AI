@@ -69,7 +69,7 @@ export function SensorDeviationChart({
             />
             <Bar dataKey="current_z_score" radius={3} cursor="pointer" onClick={(d) => onSelect((d as unknown as SensorDrift).sensor_name)} isAnimationActive={false}>
               {visible.map((d) => (
-                <Cell key={d.sensor_name} fill={d.threshold_crossed ? P.coral : P.idleBar} stroke={d.sensor_name === selected ? P.ink : 'none'} strokeWidth={d.sensor_name === selected ? 2.5 : 0} fillOpacity={selected && d.sensor_name !== selected ? 0.55 : 1} />
+                <Cell key={d.sensor_name} fill={d.threshold_crossed ? P.red : P.idleBar} stroke={d.sensor_name === selected ? P.ink : 'none'} strokeWidth={d.sensor_name === selected ? 2.5 : 0} fillOpacity={selected && d.sensor_name !== selected ? 0.55 : 1} />
               ))}
             </Bar>
           </BarChart>

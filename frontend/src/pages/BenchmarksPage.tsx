@@ -10,7 +10,7 @@ import { isMockMode } from '../lib/config'
 import type { BenchmarkResult } from '../schemas/api'
 import { P } from '../lib/palette'
 
-const PALETTE = [P.teal, P.yellow, P.orange, P.green]
+const PALETTE = [P.wine, P.peach, P.amber, P.sage]
 
 function dsKind(id: string, activeId?: string | null, mode?: string) {
   if (id === 'NASA_FD001') return 'Real NASA C-MAPSS'

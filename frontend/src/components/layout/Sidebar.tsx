@@ -5,8 +5,8 @@ import { useSelectedMachine } from '../../hooks/useSelectedMachine'
 
 const Logo = () => (
   <svg viewBox="0 0 32 32" className="size-8 shrink-0" aria-hidden>
-    <rect width="32" height="32" rx="7" fill="#FFFFFF" stroke="#BCD5E6" />
-    <path d="M5 21l6-8 5 5 6-10 5 7" fill="none" stroke="#01B4BB" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    <rect width="32" height="32" rx="8" fill="#8A1820" />
+    <path d="M5 21l6-8 5 5 6-10 5 7" fill="none" stroke="#FEC097" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
