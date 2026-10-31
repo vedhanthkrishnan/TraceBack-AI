@@ -4,6 +4,18 @@
 
 > Not just an alarm. The evidence behind it.
 
+## Submission materials
+
+| Required item | Where |
+|---|---|
+| Source code | this repository (`backend/`, `frontend/`) |
+| README with overview, setup and usage | this file |
+| Run / deployment instructions | [docs/RUN_GUIDE.md](docs/RUN_GUIDE.md) (local, Docker) |
+| Problem statement | [docs/PROBLEM_STATEMENT.md](docs/PROBLEM_STATEMENT.md) |
+| Pitch deck | [docs/TraceBack-AI-Pitch-Deck.pdf](docs/TraceBack-AI-Pitch-Deck.pdf) |
+| Demo video (under 3 minutes) | [docs/TraceBack-AI-Demo.mp4](https://github.com/vedhanthkrishnan/TraceBack-AI/blob/main/docs/TraceBack-AI-Demo.mp4) |
+| Licence | [MIT](LICENSE) |
+
 ## Problem
 
 Fleet monitoring says *that* a machine is in trouble ("Machine 104: critical"), not *why*. Engineers must dig
