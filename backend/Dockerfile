@@ -15,7 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application source code
 COPY backend/ /app/backend/
-COPY data/ /app/data/
+# Runtime data (local mock DB) lives here; /data is git-ignored, so create it instead of copying it
+RUN mkdir -p /app/data
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1

@@ -5,7 +5,7 @@ Explicitly labelled as synthetic data for evaluation and benchmarking.
 """
 import argparse
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import numpy as np
 import pandas as pd
 

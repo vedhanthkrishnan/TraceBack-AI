@@ -24,10 +24,10 @@ The core workflow: click an abnormal sensor → see when it deviated (health cha
 ## Run
 
 ```bash
-# 1. Backend (from repo root; see backend README). Seed demo data first:
-#    NOTE: backend/scripts/generate_synthetic_fleet.py is missing `Optional` in its typing import
-#    (see "Backend issues found" below) – add it before running seed_demo.py.
-cd backend && uvicorn app.main:app --port 8000
+# 1. Backend (from the repository root; see ../docs/RUN_GUIDE.md)
+pip install -r backend/requirements.txt
+python backend/scripts/seed_demo.py
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 
 # 2. Frontend
 cd frontend
@@ -35,6 +35,9 @@ cp .env.example .env
 npm install
 npm run dev            # http://127.0.0.1:5173
 ```
+
+The backend can also serve the UI itself: `npm run build:backend` writes a same-origin production build to `../backend/app/static`,
+after which <http://127.0.0.1:8000> shows the app with no separate dev server.
 
 CORS on the backend allows `localhost`/`127.0.0.1` on ports 3000 and 5173 only.
 
@@ -90,8 +93,8 @@ npm run test:e2e    # Playwright against live backend + dev server (9 tests)
 
 ## Backend issues found (not modified)
 
-- `backend/scripts/generate_synthetic_fleet.py` uses `Optional[str]` without importing `Optional` → `seed_demo.py` crashes with `NameError`.
-  Fix: `from typing import Any, Dict, List, Optional`.
+- `backend/scripts/generate_synthetic_fleet.py` used `Optional[str]` without importing `Optional`, so `seed_demo.py` crashed with
+  `NameError`. Fixed during submission prep (`from typing import Dict, Any, List, Optional`).
 
 ## Not verified
 
