@@ -25,7 +25,8 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         client_ip = request.client.host if request.client else "unknown"
         path = request.url.path
 
-        if not _check_rate_limit(client_ip, path):
+        # Rate limit API calls only; static frontend files are not throttled
+        if path.startswith("/api/") and not _check_rate_limit(client_ip, path):
             from fastapi.responses import JSONResponse
             return JSONResponse(
                 status_code=429,

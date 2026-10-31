@@ -1,0 +1,1 @@
+function e(e){return e?e.mock_fallback_active||/offline|mock/i.test(e.provider):!1}export{e as t};

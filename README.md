@@ -1,4 +1,69 @@
-# TraceBack AI — Evidence-Driven Predictive Maintenance Backend
+# TraceBack AI — Evidence-Driven Predictive Maintenance
+
+**ExaThon India 2026 · Track: Factories, Fleets & Supply Chains**
+
+> Not just an alarm. The evidence behind it.
+
+## Problem
+
+Fleet monitoring says *that* a machine is in trouble ("Machine 104: critical"), not *why*. Engineers must dig
+through raw sensor streams to find what changed, when it started, and whether it has happened before. See
+[docs/PROBLEM_STATEMENT.md](docs/PROBLEM_STATEMENT.md).
+
+## What TraceBack AI does
+
+For every machine it answers three questions, each backed by data:
+
+1. **When did it start?** First sustained anomaly, marked on a health trend.
+2. **Which sensors are the evidence?** Ranked by deviation from the machine's own healthy baseline, drift rate and persistence.
+3. **Has this been seen before?** Historical run-to-failure machines with a similar drift pattern.
+
+An evidence-grounded **AI Copilot** explains the results; every claim links back to evidence, and missing data is stated, not guessed.
+Analytics are computed deterministically in SQL (Exasol) and Python services, so the system works with no LLM at all.
+
+## What's in this repository
+
+| Folder | What it is |
+|---|---|
+| `backend/` | FastAPI service, analytics pipeline, Exasol SQL layer with an isolated SQLite fallback, tests |
+| `frontend/` | React + TypeScript source (a production build is committed in `backend/app/static` and served by the backend): Fleet Overview, Machine Investigation, Failure Patterns, Copilot, Benchmarks, Settings |
+| `docs/` | [Run guide](docs/RUN_GUIDE.md), [problem statement](docs/PROBLEM_STATEMENT.md), [demo script](docs/DEMO_SCRIPT.md), [pitch deck (PDF)](docs/TraceBack-AI-Pitch-Deck.pdf), judge notes, backend audit |
+| `docker-compose.yml` | Backend container |
+
+## Quick start (one server, one command)
+
+The backend also serves the built web app, so you only need Python.
+
+```bash
+git clone https://github.com/vedhanthkrishnan/TraceBack-AI.git
+cd TraceBack-AI
+pip install -r backend/requirements.txt
+cp backend/.env.example backend/.env          # Windows PowerShell: Copy-Item backend\.env.example backend\.env
+python backend/scripts/seed_demo.py           # loads the synthetic 12-machine fleet
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+
+Open **http://127.0.0.1:8000** for the app (API docs at `/docs`). No Exasol needed: without it the backend uses an
+isolated SQLite engine automatically. Developing the UI, Docker, Windows commands and troubleshooting:
+**[docs/RUN_GUIDE.md](docs/RUN_GUIDE.md)**.
+
+## Honest limits
+
+The demo fleet is **synthetic** (12 machines) and labelled as such in the UI. Sensor deviation is statistical
+evidence, not proven cause. Remaining useful life is unvalidated. The Copilot uses an offline grounded engine
+by default; a live LLM is optional.
+
+## Creators
+
+Jyothik Bollineni and Vedhanth Krishnan, built for ExaThon India 2026.
+
+## Licence
+
+[MIT](LICENSE) © 2026 Jyothik Bollineni and Vedhanth Krishnan
+
+---
+
+# Backend reference
 
 TraceBack AI is a predictive maintenance analytics backend that helps industrial operations teams understand **why** machines deteriorate, **which** sensors provide evidence of deterioration, and **which** historical failures resemble the current machine's behaviour.
 
@@ -169,8 +234,8 @@ backend/
 
 ### Step 1: Clone and Create Virtual Environment
 ```powershell
-git clone <repository_url>
-cd "AR VR"
+git clone https://github.com/vedhanthkrishnan/TraceBack-AI.git
+cd TraceBack-AI
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
@@ -214,6 +279,8 @@ python backend/scripts/seed_demo.py
 ```
 
 ### Sample Demo Output
+
+_Illustrative: machine IDs, sensors and scores depend on the seeded fleet and may differ from a fresh run._
 ```
 ======================================================================
    DEMO SHOWCASE MACHINE: M011
@@ -278,7 +345,7 @@ Interactive API documentation will be available at:
 
 ## 9. Connecting the React Frontend
 
-The React/TypeScript frontend can directly communicate with this backend:
+The React/TypeScript frontend in [`frontend/`](frontend/README.md) communicates with this backend:
 1. Base API URL: `http://127.0.0.1:8000/api/v1`
 2. CORS is pre-configured for `http://localhost:3000` and `http://localhost:5173`.
 3. Every response conforms to the uniform envelope:

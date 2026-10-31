@@ -11,7 +11,8 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:backend": "tsc -b && vite build --mode backend --outDir ../backend/app/static --emptyOutDir"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
