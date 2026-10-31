@@ -31,7 +31,7 @@ Button.displayName = 'Button'
 
 export function Card({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('rounded-2xl border border-line bg-surface', className)} {...rest}>
+    <div className={cn('tb-card rounded-2xl border border-line bg-surface', className)} {...rest}>
       {children}
     </div>
   )
@@ -136,7 +136,7 @@ export function Term({ children, tip }: { children: ReactNode; tip: string }) {
 
 export function ProgressBar({ value, max = 100, label, tone = 'accent' }: { value: number; max?: number; label: string; tone?: 'accent' | 'critical' | 'watch' | 'healthy' }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100))
-  const color = { accent: 'bg-teal', critical: 'bg-coral', watch: 'bg-orange', healthy: 'bg-green' }[tone]
+  const color = { accent: 'bg-wine', critical: 'bg-critical', watch: 'bg-watch', healthy: 'bg-healthy' }[tone]
   return (
     <div role="progressbar" aria-label={label} aria-valuenow={Math.round(value)} aria-valuemin={0} aria-valuemax={max} className="h-1.5 w-full overflow-hidden rounded-full bg-elevated">
       <div className={cn('h-full rounded-full', color)} style={{ width: `${pct}%` }} />

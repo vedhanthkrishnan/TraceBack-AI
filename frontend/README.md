@@ -27,7 +27,7 @@ The core workflow: click an abnormal sensor → see when it deviated (health cha
 # 1. Backend (from the repository root; see ../docs/RUN_GUIDE.md)
 pip install -r backend/requirements.txt
 python backend/scripts/seed_demo.py
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 
 # 2. Frontend
 cd frontend

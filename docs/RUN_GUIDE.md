@@ -45,7 +45,7 @@ cp backend/.env.example backend/.env
 python backend/scripts/seed_demo.py
 
 # Start API + app on one port
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 ```
 
 Open <http://127.0.0.1:8000>. The header badge should read **API connected**. API docs: <http://127.0.0.1:8000/docs>.

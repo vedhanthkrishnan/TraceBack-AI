@@ -34,7 +34,7 @@ export function PriorityHero() {
         onClick={() => open(`/machines/${id}`)}
         className="tb-lift group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-line bg-surface p-5 text-left md:col-span-2 sm:p-7"
       >
-        <span aria-hidden className="pointer-events-none absolute -right-16 -top-20 size-72 rounded-full bg-critical/20 blur-3xl" />
+        <span aria-hidden className="pointer-events-none absolute -right-16 -top-20 size-72 rounded-full bg-peach/60 blur-3xl" />
         <div className="relative flex flex-wrap items-center gap-2">
           <span className="micro">highest risk</span>
           <RiskBadge category={top.risk_category} size="sm" />
@@ -58,12 +58,12 @@ export function PriorityHero() {
       <button
         type="button"
         onClick={() => open(`/copilot?machine=${id}`)}
-        className="tb-lift flex flex-col justify-between gap-6 rounded-3xl border border-line bg-elevated p-5 text-left sm:p-7"
+        className="tb-lift relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-wine bg-wine p-5 text-left text-white sm:p-7"
       >
-        <span aria-hidden />
+        <span aria-hidden className="pointer-events-none absolute -bottom-16 -right-12 size-56 rounded-full bg-peach/30 blur-2xl" />
         <div>
-          <MessageSquareText className="mb-3 size-6 text-accent-2" aria-hidden />
-          <div className="display display-lg">Ask the copilot</div>
+          <MessageSquareText className="relative mb-3 size-6 text-peach" aria-hidden />
+          <div className="display display-lg relative">Ask the copilot</div>
         </div>
       </button>
     </section>

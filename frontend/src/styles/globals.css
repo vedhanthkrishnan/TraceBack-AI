@@ -1,49 +1,54 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource-variable/fraunces/index.css';
 
 /*
- * TraceBack design tokens — bright "macaron" palette (green / teal / yellow / orange / coral) on a light sky base.
+ * TraceBack design tokens: warm "red" palette (wine / red / blush / peach / amber) on a soft blush base.
  * Keep in sync with src/lib/palette.ts (used by charts/SVG). Rationale: docs/DESIGN.md
  */
 @theme {
   /* surfaces */
-  --color-bg: #d2e6f3;
-  --color-sidebar: #f3f9fd;
+  --color-bg: #fbf4ef;
+  --color-sidebar: #fffaf7;
   --color-surface: #ffffff;
-  --color-elevated: #eaf3fa;
-  --color-line: #bcd5e6;
-  --color-line-strong: #8fb4ce;
+  --color-elevated: #f8ece6;
+  --color-line: #ecd6cc;
+  --color-line-strong: #d3a89a;
 
   /* text */
-  --color-ink: #0e2b3c;
-  --color-muted: #3a586b;
-  --color-faint: #4b6a7e;
+  --color-ink: #32312d;
+  --color-muted: #5c4e49;
+  --color-faint: #6b5b55;
 
-  /* brand fills */
-  --color-green: #5fa65a;
-  --color-teal: #01b4bb;
-  --color-yellow: #f5d51e;
-  --color-orange: #fb8926;
-  --color-coral: #fa5456;
+  /* brand fills (from the colour card) */
+  --color-wine: #8a1820;
+  --color-red: #e83e3e;
+  --color-blush: #f5e6df;
+  --color-peach: #fec097;
+  --color-amber: #da7702;
+  --color-sage: #5f8f66;
 
   /* roles */
-  --color-accent: #f5d51e; /* yellow — interaction fills: primary buttons, active nav */
-  --color-on-accent: #0e2b3c; /* text on yellow */
-  --color-accent-2: #07707b; /* deep teal — text-safe brand colour: links, focus ring */
+  --color-accent: #8a1820; /* wine: interaction fills, primary buttons, active nav */
+  --color-on-accent: #ffffff; /* text on wine */
+  --color-accent-2: #a3202a; /* text-safe red: links, focus ring, small icons */
 
   /* risk semantics: tint/border colours, then text-safe tints (WCAG AA on white) */
-  --color-healthy: #5fa65a;
-  --color-healthy-fg: #2c7a34;
-  --color-watch: #fb8926;
-  --color-watch-fg: #a85200;
-  --color-critical: #fa5456;
-  --color-critical-fg: #c4283a;
-  --color-unknown: #5b7184;
-  --color-idle: #b7ccdb;
+  --color-healthy: #5f8f66;
+  --color-healthy-fg: #2f6b3a;
+  --color-watch: #da7702;
+  --color-watch-fg: #94500a;
+  --color-critical: #e83e3e;
+  --color-critical-fg: #c2262e;
+  --color-unknown: #6f6560;
+  --color-idle: #e6d2c8;
 
   --font-sans: 'Archivo Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: 'Archivo Variable', 'Arial Narrow', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-mono: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  --shadow-card: 0 1px 2px rgb(138 24 32 / 0.05), 0 8px 24px -12px rgb(138 24 32 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(138 24 32 / 0.06), 0 16px 32px -14px rgb(138 24 32 / 0.28);
 }
 
 :root { color-scheme: light; }
@@ -51,7 +56,11 @@
 html, body, #root { height: 100%; }
 body {
   margin: 0;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(900px 480px at 85% -8%, rgb(254 192 151 / 0.38), transparent 70%),
+    radial-gradient(700px 420px at -5% 105%, rgb(232 62 62 / 0.08), transparent 70%);
+  background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -65,20 +74,24 @@ body {
   border-radius: 4px;
 }
 
+::selection { background: var(--color-peach); color: var(--color-ink); }
+
 .tabular { font-variant-numeric: tabular-nums; }
 
-/* Display type (landonorris.com-inspired): big, heavy, condensed, all-caps; paired with lowercase micro-labels. */
+/* Display type: soft, high-contrast serif for headlines and big numerals; paired with lowercase micro-labels. */
 .display {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-stretch: 75%;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 0.95;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
 }
-.display-xl { font-size: clamp(2.5rem, 7vw, 5.25rem); }
-.display-lg { font-size: clamp(1.9rem, 4vw, 3rem); }
-.micro { font-size: 0.6875rem; letter-spacing: 0; text-transform: lowercase; color: var(--color-muted); }
+.display-xl { font-size: clamp(2.5rem, 6.5vw, 4.75rem); }
+.display-lg { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+.micro { font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: lowercase; color: var(--color-muted); }
+
+/* soft card surface used by the big rounded panels */
+.tb-card { box-shadow: var(--shadow-card); }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: var(--color-line-strong); border-radius: 8px; border: 2px solid var(--color-bg); }
@@ -92,9 +105,9 @@ body {
 @keyframes tb-rise { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
 .tb-rise { animation: tb-rise .45s cubic-bezier(.2,.7,.2,1) both; }
 
-/* collectible-card hover: lift + warm border */
-.tb-lift { transition: transform .18s ease, border-color .18s ease, background-color .18s ease; }
-.tb-lift:hover { transform: translateY(-2px); border-color: var(--color-accent-2); }
+/* card hover: lift + warm border + deeper shadow */
+.tb-lift { box-shadow: var(--shadow-card); transition: transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+.tb-lift:hover { transform: translateY(-3px); border-color: var(--color-red); box-shadow: var(--shadow-lift); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }

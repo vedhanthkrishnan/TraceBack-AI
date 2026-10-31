@@ -40,7 +40,7 @@ cd TraceBack-AI
 pip install -r backend/requirements.txt
 cp backend/.env.example backend/.env          # Windows PowerShell: Copy-Item backend\.env.example backend\.env
 python backend/scripts/seed_demo.py           # loads the synthetic 12-machine fleet
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 ```
 
 Open **http://127.0.0.1:8000** for the app (API docs at `/docs`). No Exasol needed: without it the backend uses an
@@ -308,7 +308,7 @@ Historical Run-to-Failure Matches:
 
 Start the FastAPI development server:
 ```powershell
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 Interactive API documentation will be available at:

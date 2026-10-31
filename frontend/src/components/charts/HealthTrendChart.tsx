@@ -57,16 +57,16 @@ export function HealthTrendChart({
           <ComposedChart data={data} margin={{ top: 10, right: 16, bottom: 4, left: -8 }} onClick={(e) => { const c = (e as { activeLabel?: string | number } | null)?.activeLabel; if (c !== undefined && onSelectCycle) onSelectCycle(Number(c)) }}>
             <defs>
               <linearGradient id="healthFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={P.teal} stopOpacity={0.28} />
-                <stop offset="100%" stopColor={P.teal} stopOpacity={0} />
+                <stop offset="0%" stopColor={P.wine} stopOpacity={0.28} />
+                <stop offset="100%" stopColor={P.wine} stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke={P.line} strokeDasharray="3 3" vertical={false} />
             <XAxis dataKey="cycle" type="number" domain={['dataMin', 'dataMax']} tick={{ fill: P.muted, fontSize: 11 }} stroke={P.lineStrong} label={{ value: 'Operating cycle', position: 'insideBottom', offset: -2, fill: P.faint, fontSize: 11 }} height={36} />
             <YAxis domain={[0, 100]} ticks={[0, 25, 50, 75, 100]} tick={{ fill: P.muted, fontSize: 11 }} stroke={P.lineStrong} label={{ value: 'Health score (0–100)', angle: -90, position: 'insideLeft', offset: 18, fill: P.faint, fontSize: 11, style: { textAnchor: 'middle' } }} width={52} />
             <ReferenceArea x1={Math.max(1, win?.[0] ?? 1)} x2={baselineWindow} fill={P.muted} fillOpacity={0.08} ifOverflow="hidden" label={{ value: 'Baseline window', fill: P.faint, fontSize: 10, position: 'insideTop' }} />
-            <ReferenceLine y={watchHealth} stroke={P.orange} strokeDasharray="5 4" strokeOpacity={0.8} label={{ value: `Watch ≤ ${watchHealth} (configured)`, fill: P.orangeText, fontSize: 10, position: 'insideBottomLeft' }} />
-            <ReferenceLine y={criticalHealth} stroke={P.coral} strokeDasharray="5 4" strokeOpacity={0.8} label={{ value: `Critical ≤ ${criticalHealth} (configured)`, fill: P.coralText, fontSize: 10, position: 'insideBottomLeft' }} />
+            <ReferenceLine y={watchHealth} stroke={P.amber} strokeDasharray="5 4" strokeOpacity={0.8} label={{ value: `Watch ≤ ${watchHealth} (configured)`, fill: P.amberText, fontSize: 10, position: 'insideBottomLeft' }} />
+            <ReferenceLine y={criticalHealth} stroke={P.red} strokeDasharray="5 4" strokeOpacity={0.8} label={{ value: `Critical ≤ ${criticalHealth} (configured)`, fill: P.redText, fontSize: 10, position: 'insideBottomLeft' }} />
             {firstAnomalyCycle ? <ReferenceLine x={firstAnomalyCycle} stroke={P.ink} strokeWidth={1.5} label={{ value: 'First sustained anomaly', fill: P.ink, fontSize: 10, position: 'insideTopRight' }} /> : null}
             {selectedCycle ? <ReferenceLine x={selectedCycle} stroke={P.ink} strokeOpacity={0.5} strokeDasharray="2 3" /> : null}
             <Tooltip
@@ -75,7 +75,7 @@ export function HealthTrendChart({
               formatter={(v, _n, item) => [`${fmtNumber(Number(v), 2)} · ${riskStyle((item.payload as HistoryPoint).risk_category).label}`, 'Health score']}
             />
             <Area type="monotone" dataKey="health_score" stroke="none" fill="url(#healthFill)" isAnimationActive={false} />
-            <Line type="monotone" dataKey="health_score" stroke={P.teal} strokeWidth={2} dot={false} activeDot={{ r: 4, fill: P.yellow, stroke: P.ink }} isAnimationActive={false} />
+            <Line type="monotone" dataKey="health_score" stroke={P.wine} strokeWidth={2} dot={false} activeDot={{ r: 4, fill: P.peach, stroke: P.ink }} isAnimationActive={false} />
             {transitions.map((t) => {
               const pt = history.find((h) => h.cycle === t.cycle)
               return pt ? <ReferenceDot key={`${t.cycle}-${t.to}`} x={t.cycle} y={pt.health_score} r={5} fill={riskStyle(t.to).hex} stroke={P.surface} strokeWidth={2} ifOverflow="hidden" /> : null
